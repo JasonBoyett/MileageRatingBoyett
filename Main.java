@@ -7,50 +7,37 @@
 
 import java.awt.HeadlessException;
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Main{
-    protected enum RATING {
+public class Main{//memory hook
+
+    protected enum RATING {//a set of enumerated values to represent the different ratings a car can have and an error
         Poor, Fair, Good, Excelent, Error
     }
-    
 
-    public static void main(String[] args) throws NumberFormatException, HeadlessException, Exception {
-        ImageIcon unscaledCar   = new ImageIcon("car.png");
-        Image toScaler = unscaledCar.getImage();
-        Image scaler = toScaler.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
-        ImageIcon scaledCar = new ImageIcon(scaler);
-         String carName = String.valueOf(JOptionPane.showInputDialog(null, "what kind of car do you have?", null, JOptionPane.INFORMATION_MESSAGE, scaledCar, null, ""));
+    public static void main(String[] args) throws NumberFormatException, HeadlessException, Exception {//memory hook
+        ImageIcon car = scaleImageIcon("car.png",20,20);//takes an image file and scales it to the desired size
+        String carName = String.valueOf(JOptionPane.showInputDialog(null, "what kind of car do you have?", null, JOptionPane.INFORMATION_MESSAGE, car, null, ""));//a JOptionPane that gets the name of the users car
         
-        try {
-            RATING rating = getRATING(Double.parseDouble(String.valueOf(JOptionPane.showInputDialog(null, "What is your car's MPG?", null, JOptionPane.INFORMATION_MESSAGE, scaledCar, null, ""))));
-            if (rating == RATING.Error) {
-                JOptionPane.showMessageDialog(null, "something went wrong.", "error", JOptionPane.ERROR_MESSAGE);
+        try {//this try block outputs various JOptionPanes depending on the rating of the user's mpg value
+            RATING rating = getRATING(Double.parseDouble(String.valueOf(JOptionPane.showInputDialog(null, "What is your car's MPG?", null, JOptionPane.INFORMATION_MESSAGE, car, null, ""))));//a JOptionPane that gets the user's mpg
+            if (rating == RATING.Error) {//if the RATING comes back as an Error then an error message is displayedJOptionPane.showMessageDialog(null, "something went wrong.", "error", JOptionPane.ERROR_MESSAGE);
             } else if (rating == RATING.Excelent) {
-                JOptionPane.showMessageDialog(null, "your " + carName + " has excelent gass milage", "Excelent",
-                        JOptionPane.INFORMATION_MESSAGE,  scaledCar);
+                JOptionPane.showMessageDialog(null, "your " + carName + " has excelent gas milage", "Excelent",JOptionPane.INFORMATION_MESSAGE, car);
             } else if (rating == RATING.Poor) {
-                JOptionPane.showMessageDialog(null, "your " + carName + " has poor gass milage", "Poor",
-                        JOptionPane.INFORMATION_MESSAGE,  scaledCar);
+                JOptionPane.showMessageDialog(null, "your " + carName + " has poor gas milage", "Poor",JOptionPane.INFORMATION_MESSAGE, car);
             } else if (rating == RATING.Fair) {
-                JOptionPane.showMessageDialog(null, "your " + carName + " has fair gass milage", "Fair",
-                        JOptionPane.INFORMATION_MESSAGE, scaledCar);
+                JOptionPane.showMessageDialog(null, "your " + carName + " has fair gas milage", "Fair",JOptionPane.INFORMATION_MESSAGE, car);
             } else if (rating == RATING.Good) {
-                JOptionPane.showMessageDialog(null, "your " + carName + " has good gass milage", "Good",
-                        JOptionPane.INFORMATION_MESSAGE,  scaledCar);
+                JOptionPane.showMessageDialog(null, "your " + carName + " has good gas milage", "Good",JOptionPane.INFORMATION_MESSAGE, car);
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {//throws an exception if the user does not enter the value as a number
             JOptionPane.showMessageDialog(null, "something went wrong.", "error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private static void setIconImage(ImageIcon scaledCar) {
-    }
-
-    public static RATING getRATING(double mpg){
+    public static RATING getRATING(double mpg){//takes the user's mpg rating and gives it a rating that is then returned. If the mpg rating is 0 or less this method returns Error
         try{
             if(mpg < 20){
                 return RATING.Poor;
@@ -64,10 +51,21 @@ public class Main{
             else if(mpg >= 40){
                 return RATING.Excelent;
             }
+            else if(mpg <= 0){
+                return RATING.Error;
+            }
         }
-        catch(Exception e){
+        catch(Exception e){//returns Error if anything goes wrong
             return RATING.Error;
         }
         return RATING.Error;
+    }//end of getRATING method
+
+    public static ImageIcon scaleImageIcon(String path, int width, int height){
+        ImageIcon icon = new ImageIcon(path);//imports the image as an image icon
+        Image image = icon.getImage();//casts the image as an Image object
+        Image scaled = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);//scales the image
+        icon.setImage(scaled);//recasts the scaled image as an ImageIcon
+        return icon;//returns the scaled ImageIcon
     }
-}
+}//end of Main class
