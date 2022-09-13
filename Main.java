@@ -17,7 +17,7 @@ public class Main{//memory hook
     }
 
     public static void main(String[] args) throws NumberFormatException, HeadlessException, Exception {//memory hook
-        ImageIcon car = scaleImageIcon("car.png",20,20);//takes an image file and scales it to the desired size
+        ImageIcon car = scaleImageIcon("car.png",100,100);//takes an image file and scales it to the desired size
         String carName = String.valueOf(JOptionPane.showInputDialog(null, "what kind of car do you have?", null, JOptionPane.INFORMATION_MESSAGE, car, null, ""));//a JOptionPane that gets the name of the users car
         
         try {//this try block outputs various JOptionPanes depending on the rating of the user's mpg value
