@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 public class Main{//memory hook
 
     protected enum RATING {//a set of enumerated values to represent the different ratings a car can have and an error
-        Poor, Fair, Good, Excelent, Error
+        Poor, Fair, Good, Excellent, Error
     }
 
     public static void main(String[] args) throws NumberFormatException, HeadlessException, Exception {//memory hook
@@ -23,7 +23,7 @@ public class Main{//memory hook
         try {//this try block outputs various JOptionPanes depending on the rating of the user's mpg value
             RATING rating = getRATING(Double.parseDouble(String.valueOf(JOptionPane.showInputDialog(null, "What is your car's MPG?", null, JOptionPane.INFORMATION_MESSAGE, car, null, ""))));//a JOptionPane that gets the user's mpg
             if (rating == RATING.Error) {//if the RATING comes back as an Error then an error message is displayedJOptionPane.showMessageDialog(null, "something went wrong.", "error", JOptionPane.ERROR_MESSAGE);
-            } else if (rating == RATING.Excelent) {
+            } else if (rating == RATING.Excellent) {
                 JOptionPane.showMessageDialog(null, "your " + carName + " has excelent gas milage", "Excelent",JOptionPane.INFORMATION_MESSAGE, car);
             } else if (rating == RATING.Poor) {
                 JOptionPane.showMessageDialog(null, "your " + carName + " has poor gas milage", "Poor",JOptionPane.INFORMATION_MESSAGE, car);
@@ -49,7 +49,7 @@ public class Main{//memory hook
                 return RATING.Good;
             }
             else if(mpg >= 40){
-                return RATING.Excelent;
+                return RATING.Excellent;
             }
             else if(mpg <= 0){
                 return RATING.Error;
