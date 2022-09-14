@@ -22,7 +22,8 @@ public class Main{//memory hook
         
         try {//this try block outputs various JOptionPanes depending on the rating of the user's mpg value
             RATING rating = getRATING(Double.parseDouble(String.valueOf(JOptionPane.showInputDialog(null, "What is your car's MPG?", null, JOptionPane.INFORMATION_MESSAGE, car, null, ""))));//a JOptionPane that gets the user's mpg
-            if (rating == RATING.Error) {//if the RATING comes back as an Error then an error message is displayedJOptionPane.showMessageDialog(null, "something went wrong.", "error", JOptionPane.ERROR_MESSAGE);
+            if (rating == RATING.Error) {//if the RATING comes back as an Error then an error message is displayed
+                JOptionPane.showMessageDialog(null, "something went wrong.", "error", JOptionPane.ERROR_MESSAGE);
             } else if (rating == RATING.Excellent) {
                 JOptionPane.showMessageDialog(null, "your " + carName + " has excelent gas milage", "Excelent",JOptionPane.INFORMATION_MESSAGE, car);
             } else if (rating == RATING.Poor) {
@@ -39,7 +40,7 @@ public class Main{//memory hook
 
     public static RATING getRATING(double mpg){//takes the user's mpg rating and gives it a rating that is then returned. If the mpg rating is 0 or less this method returns Error
         try{
-            if(mpg < 20){
+            if(mpg > 0 && mpg < 20){
                 return RATING.Poor;
             }
             else if(mpg >= 20 && mpg < 30){
