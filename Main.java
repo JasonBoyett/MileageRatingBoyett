@@ -46,6 +46,7 @@ public class Main {// memory hook
         } catch (NumberFormatException e) {// throws an exception if the user does not enter the value as a number
             JOptionPane.showMessageDialog(null, "something went wrong.", "error", JOptionPane.ERROR_MESSAGE);
         }
+        System.exit(0);
     }
 
     public static RATING getRATING(double mpg) {// takes the user's mpg rating and gives it a rating that is then
